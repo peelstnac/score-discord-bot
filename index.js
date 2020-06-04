@@ -4,7 +4,7 @@ const fs = require('fs');
 //client id 718181530945454132
 const token = JSON.parse(fs.readFileSync('token.json'));
 var config;
-
+//merge test
 var sieve = [];
 for(var i = 0; i <= 1000; i++) sieve.push(true);
 for(var i = 2; i*i <= 1000; i++) {
