@@ -44,7 +44,7 @@ bot.on('message', (msg) => {
 		if(args.length == 1) return;
 		msg.channel.send('Hello ' + args[1] + ', I\'m Score!');
 	}
-	if(msg.content.slice(0, 3).toLowerCase() == 'i am') {
+	if(msg.content.slice(0, 4).toLowerCase() == 'i am') {
 		var args = msg.content.split(' ');
 		if(args.length == 2) return;
 		msg.channel.send('Hello ' + args[2] + ', I\'m Score!');
