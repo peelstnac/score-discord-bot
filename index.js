@@ -14,6 +14,14 @@ for(var i = 2; i*i <= 1000; i++) {
 	}
 }
 
+/*
+temp = {
+	arr: []
+}
+for(var i = 0; i <= 1000; i++) temp.arr.push(sieve[i]);
+fs.writeFileSync('primes.json', JSON.stringify(temp));
+*/
+
 bot.on('ready', () => {
 	config = JSON.parse(fs.readFileSync('config.json'));
 	console.log('Bot is ready.');
@@ -31,10 +39,15 @@ bot.on('guildCreate', (guild) => {
 
 bot.on('message', (msg) => {
 	if(msg.author.bot) return;
-	if(msg.content.slice(0, 3).toLowerCase() == 'i\'m' || msg.content.slice(0, 4).toLowerCase() == 'i am') {
+	if(msg.content.slice(0, 3).toLowerCase() == 'i\'m') {
 		var args = msg.content.split(' ');
 		if(args.length == 1) return;
 		msg.channel.send('Hello ' + args[1] + ', I\'m Score!');
+	}
+	if(msg.content.slice(0, 3).toLowerCase() == 'i am') {
+		var args = msg.content.split(' ');
+		if(args.length == 2) return;
+		msg.channel.send('Hello ' + args[2] + ', I\'m Score!');
 	}
 	if(msg.content[0] !== config[msg.guild.id].prefix) return;
 	msg.content = msg.content.slice(1, msg.content.length).toLowerCase();
