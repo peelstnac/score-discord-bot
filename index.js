@@ -42,11 +42,13 @@ bot.on('message', (msg) => {
 	if(msg.content.slice(0, 3).toLowerCase() == 'i\'m') {
 		var args = msg.content.split(' ');
 		if(args.length == 1) return;
+		if(args.slice(2, args.length).join(" ").length > 1500) return;
 		msg.channel.send('Hello ' + args.slice(1, args.length).join(" ") + ', I\'m Score!');
 	}
 	if(msg.content.slice(0, 4).toLowerCase() == 'i am') {
 		var args = msg.content.split(' ');
 		if(args.length == 2) return;
+		if(args.slice(2, args.length).join(" ").length > 1500) return;
 		msg.channel.send('Hello ' + args.slice(2, args.length).join(" ") + ', I\'m Score!');
 	}
 	if(msg.content[0] !== config[msg.guild.id].prefix) return;
