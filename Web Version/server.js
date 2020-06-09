@@ -51,6 +51,14 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/views/index.html");
 });
 
+app.get("/leaderboard", async (req, res) => {
+  var leaderboard = await Leaderboard.find({
+    name: "leaderboard"
+  });
+  leaderboard = leaderboard[0].val;
+  res.json(JSON.stringify(leaderboard));
+});
+
 var values = JSON.parse(fs.readFileSync("values.json"));
 var primes = JSON.parse(fs.readFileSync("primes.json"));
 
