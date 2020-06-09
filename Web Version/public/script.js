@@ -29,7 +29,9 @@ $(document).ready(async () => {
     var bet = parseInt($("#bet-value").val());
     if (username.length == 0 || !Number.isInteger(bet)) {
       alert("Must enter a valid username and bet.");
-    } else {
+    } else if (username.length > 20)
+      console.log("Please enter a username less than or equal to 20 characters.");
+    else {
       $.get("/bet/" + username + "/" + bet, (data, status) => {
         console.log("GET score: " + status);
         if (status == "success") {

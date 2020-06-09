@@ -64,7 +64,7 @@ var primes = JSON.parse(fs.readFileSync("primes.json"));
 
 app.get("/bet/:usr/:bet", async (req, res) => {
   try {
-    if(req.params.usr.length == 0) res.sendStatus(404);
+    if(req.params.usr.length == 0 || req.params.usr.length > 20) res.sendStatus(404);
     else if (!Number.isInteger(parseInt(req.params.bet))) res.sendStatus(404);
     else if (parseInt(req.params.bet) < 1 || parseInt(req.params.bet) > 10000)
       res.sendStatus(404);
