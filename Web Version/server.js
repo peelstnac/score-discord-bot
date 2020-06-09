@@ -64,7 +64,8 @@ var primes = JSON.parse(fs.readFileSync("primes.json"));
 
 app.get("/bet/:usr/:bet", async (req, res) => {
   try {
-    if(req.params.usr.length == 0 || req.params.usr.length > 20) res.sendStatus(404);
+    if (req.params.usr.length == 0 || req.params.usr.length > 20)
+      res.sendStatus(404);
     else if (!Number.isInteger(parseInt(req.params.bet))) res.sendStatus(404);
     else if (parseInt(req.params.bet) < 1 || parseInt(req.params.bet) > 10000)
       res.sendStatus(404);
@@ -74,7 +75,7 @@ app.get("/bet/:usr/:bet", async (req, res) => {
         name: "leaderboard"
       });
       leaderboard = leaderboard[0].val;
-      console.log('leaderboard is loaded in.');
+      console.log("leaderboard is loaded in.");
       if (values.arr.length > 100) {
         values.arr = [parseInt(Math.random() * 10000)];
         fs.writeFileSync("values.json", JSON.stringify(values));
@@ -124,14 +125,19 @@ app.get("/bet/:usr/:bet", async (req, res) => {
         }
       }
       leaderboard.sort(sortBySecond);
-      if(leaderboard.length > 10) leaderboard = leaderboard.slice(0, 10);
-      await Leaderboard.findOneAndUpdate({name: 'leaderboard'}, {val: leaderboard}, {new: true}, (err, ret) => {
-        console.log('updated leaderboard.');
-        console.log(ret);
-        if(err) {
-          console.log(err);
+      if (leaderboard.length > 10) leaderboard = leaderboard.slice(0, 10);
+      await Leaderboard.findOneAndUpdate(
+        { name: "leaderboard" },
+        { val: leaderboard },
+        { new: true },
+        (err, ret) => {
+          console.log("updated leaderboard.");
+          console.log(ret);
+          if (err) {
+            console.log(err);
+          }
         }
-      });
+      );
       res.json({ score: score });
       values.arr.push(M);
       fs.writeFileSync("values.json", JSON.stringify(values));

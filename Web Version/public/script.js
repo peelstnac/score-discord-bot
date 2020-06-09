@@ -1,4 +1,26 @@
 $(document).ready(async () => {
+    if (localStorage.getItem("local-score") == null) {
+      localStorage.setItem("local-score", 0);
+    }
+    if (localStorage.getItem("previous-score") == null) {
+      localStorage.setItem("previous-score", 0);
+    }
+    $("#local-score").html(localStorage.getItem("local-score"));
+    $("#previous-score").html(localStorage.getItem("previous-score"));
+    if (localStorage.getItem("state") == null) localStorage.setIteM("state", 0);
+    var state = localStorage.getItem("state");
+    if (state == 0) {
+      $("#score-emote").attr(
+        "src",
+        "https://balermo.com/wp-content/uploads/2020/05/Pepega-meme.png"
+      );
+    } else {
+      $("#score-emote").attr(
+        "src",
+        "https://m.media-amazon.com/images/I/81vULjvv6mL._SS500_.jpg"
+      );
+    }
+  
     var leaderboard;
     await $.get("/leaderboard", (data, status) => {
       console.log("GET leaderboard: " + status);
@@ -13,15 +35,6 @@ $(document).ready(async () => {
       $("#leaderboard").append("<td>" + user[1] + "</td>");
       $("#leaderboard").append("</tr>");
     });
-  
-    if (localStorage.getItem("local-score") == null) {
-      localStorage.setItem("local-score", 0);
-    }
-    if (localStorage.getItem("previous-score") == null) {
-      localStorage.setItem("previous-score", 0);
-    }
-    $("#local-score").html(localStorage.getItem("local-score"));
-    $("#previous-score").html(localStorage.getItem("previous-score"));
   });
   
   $("#submit-bet").click(() => {
@@ -38,7 +51,10 @@ $(document).ready(async () => {
           var score = data.score;
           localStorage.setItem("previous-score", score);
           var highest_score = localStorage.getItem("local-score");
-          if (score > highest_score) localStorage.setItem("local-score", score);
+          if (score > highest_score) {
+            localStorage.setItem("local-score", score);
+            localStorage.setItem("state", 1);
+          } else localStorage.setItem("state", 0);
         }
       });
     }
