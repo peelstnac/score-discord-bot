@@ -64,7 +64,7 @@ var primes = JSON.parse(fs.readFileSync("primes.json"));
 
 app.get("/bet/:usr/:bet", async (req, res) => {
   try {
-    if (req.params.usr.length == 0 || req.params.usr.length > 20)
+    if (req.params.usr.length == 0 || req.params.usr.length > 10)
       res.sendStatus(404);
     else if (!Number.isInteger(parseInt(req.params.bet))) res.sendStatus(404);
     else if (parseInt(req.params.bet) < 1 || parseInt(req.params.bet) > 10000)
@@ -76,7 +76,7 @@ app.get("/bet/:usr/:bet", async (req, res) => {
       });
       leaderboard = leaderboard[0].val;
       console.log("leaderboard is loaded in.");
-      if (values.arr.length > 100) {
+      if (values.arr.length > 20) {
         values.arr = [parseInt(Math.random() * 10000)];
         fs.writeFileSync("values.json", JSON.stringify(values));
         console.log("Refreshed values.");
@@ -110,7 +110,8 @@ app.get("/bet/:usr/:bet", async (req, res) => {
       }
       var score = 1;
       for (var i = 0; i < values.arr.length; i++) {
-        score *= inv[values.arr[i] % m];
+        if(i%2==0) score *= inv[values.arr[i] % m];
+        else score *= values.arr[i];
         score %= MOD;
       }
       console.log("GAME: score is " + score);
