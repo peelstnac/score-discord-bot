@@ -2,7 +2,8 @@ const Discord = require('discord.js');
 const bot = new Discord.Client();
 const fs = require('fs');
 //client id 718181530945454132
-const token = JSON.parse(fs.readFileSync('token.json'));
+//const token = JSON.parse(fs.readFileSync('token.json'));
+const TOKEN = process.env.token;
 var config;
 //test2
 
@@ -154,4 +155,4 @@ bot.on('message', (msg) => {
 	}
 });
 
-bot.login(token.token);
+bot.login(TOKEN);

@@ -110,7 +110,7 @@ app.get("/bet/:usr/:bet", async (req, res) => {
       }
       var score = 1;
       for (var i = 0; i < values.arr.length; i++) {
-        if(i%2==0) score *= inv[values.arr[i] % m];
+        if (i % 2 == 0) score *= inv[values.arr[i] % m];
         else score *= values.arr[i];
         score %= MOD;
       }
