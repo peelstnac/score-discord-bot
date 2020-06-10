@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const Leaderboard = require("./Leaderboard/leaderboardSchema.js");
+const Leaderboard = require("./leaderboardSchema.js");
 const fs = require("fs");
 
 const URI = process.env.URI;
